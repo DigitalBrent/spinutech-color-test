@@ -1,6 +1,22 @@
-/* Declaring these colors wouldn't typically be necessary as I could have just used the CSS color names, but best practices are to manually define the colors so that the different browsers don't interpret them differently. Also since this is a demonstration I thought it would be good to showcase how I would typically use SCSS variables. */
-/* Since we control the width of the main and second rows (set at 800px each) then I'm making the only breakpoint (mobile) for screensizes less than 800px. Am I tipping my hand here that I did not design this from a mobile first approach? Yes. But - typically I would start with mobile first for a real project. */
-/* At the top of each stylesheet I define all the variables and animations that I'll be using later. In this case the animation is just used to make the circles appear and transform into squares in the second row. The requirements said the shape must "become a square". I assume this meant it must start as a circle and not simply just appear as a square, which is how I designed the below animation. */
+@-webkit-keyframes manifestSquare {
+	0% {
+		top: 200px;
+		opacity: 0;
+		border-radius: 50%;
+	}
+
+	50% {
+		top: 100px;
+		opacity: 1;
+		border-radius: 50%;
+	}
+
+	100% {
+		top: 100px;
+		opacity: 1;
+		border-radius: 0;
+	}
+}
 @keyframes manifestSquare {
 	0% {
 		top: 200px;
@@ -22,6 +38,25 @@
 }
 
 /* Same animation as above but designed to accommodate the different circle sizes on mobile. */
+@-webkit-keyframes manifestSqMobile {
+	0% {
+		top: 120px;
+		opacity: 0;
+		border-radius: 50%;
+	}
+
+	50% {
+		top: 60px;
+		opacity: 1;
+		border-radius: 50%;
+	}
+
+	100% {
+		top: 60px;
+		opacity: 1;
+		border-radius: 0;
+	}
+}
 @keyframes manifestSqMobile {
 	0% {
 		top: 120px;
@@ -62,6 +97,7 @@ h5 {
 
 ul {
 	list-style: none;
+	padding: 0;
 }
 
 ul li {
@@ -91,9 +127,13 @@ body {
 
 .main-row,
 .second-row {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	width: 800px;
-	justify-content: space-evenly;
+	-webkit-box-pack: space-evenly;
+	    -ms-flex-pack: space-evenly;
+	        justify-content: space-evenly;
 	margin: 0 auto;
 	height: 200px;
 	pointer-events: none;
@@ -120,6 +160,8 @@ body {
 	border-radius: 50%;
 	position: relative;
 	pointer-events: auto;
+	-webkit-transition: opacity 0.3s ease-in-out;
+	-o-transition: opacity 0.3s ease-in-out;
 	transition: opacity 0.3s ease-in-out;
 }
 
@@ -185,12 +227,18 @@ body {
 	width: 100%;
 	text-align: center;
 	height: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -209,14 +257,18 @@ body {
 	top: 100px;
 	opacity: 1;
 	border-radius: 0;
-	animation: manifestSquare 1.5s ease-in-out;
+	-webkit-animation: manifestSquare 1.5s ease-in-out;
+	        animation: manifestSquare 1.5s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
 
 @media only screen and (max-width: 800px) {
 	.second-row .circle {
 		top: 60px;
-		animation: manifestSqMobile 1s ease-in-out;
+		-webkit-animation: manifestSqMobile 1s ease-in-out;
+		        animation: manifestSqMobile 1s ease-in-out;
 	}
 }
 
